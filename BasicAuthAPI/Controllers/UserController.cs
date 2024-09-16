@@ -15,7 +15,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    [Route("/login")]
+    [Route("/CreateUser")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO createUserDto)
     {
         try

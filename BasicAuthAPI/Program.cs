@@ -26,8 +26,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-
-
 var app = builder.Build();
 
 app.UseCors(options =>

@@ -2,6 +2,7 @@
 using BasicAuthAPI.Core.Repository.Interfaces;
 using BasicAuthAPI.Database;
 using BasicAuthAPI.DTOs.NewsDTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace BasicAuthAPI.Core.Repository.Repositories;
 
@@ -14,44 +15,54 @@ public class NewsRepository : INewsRepository
         _databaseContext = databaseContext;
     }
 
-    public Task<IEnumerable<Article>> GetAllArticles()
+    public async Task<IEnumerable<Article>> GetAllArticles()
     {
-        throw new NotImplementedException();
+        return await _databaseContext.Articles.ToListAsync();
     }
 
-    public Task<Article> GetArticleById(int articleId)
+    public async Task<Article> GetArticleById(int articleId)
     {
-        throw new NotImplementedException();
+        return await _databaseContext.Articles.FirstOrDefaultAsync(a => a.Id == articleId);
     }
 
-    public Task CreateArticle(CreateArticleDTO createArticleDto)
+    public async Task CreateArticle(CreateArticleDTO createArticleDto)
     {
-        throw new NotImplementedException();
+        await _databaseContext.Articles.AddAsync(createArticleDto);
+        await _databaseContext.SaveChangesAsync();
     }
 
-    public Task DeleteArticleById(int articleId)
+    public async Task DeleteArticleById(int articleId)
     {
-        throw new NotImplementedException();
+        var articleToDelete = await _databaseContext.Articles.FirstOrDefaultAsync(a => a.Id == articleId);
+        _databaseContext.Articles.Remove(articleToDelete);
+        await _databaseContext.SaveChangesAsync();
     }
 
-    public Task EditArticle(EditArticleDTO editArticleDto)
+    public async Task EditArticle(EditArticleDTO editArticleDto, int articleId)
     {
-        throw new NotImplementedException();
+        var articleToEdit = await _databaseContext.Articles.FirstOrDefaultAsync(a => a.Id == articleId);
+        _databaseContext.Articles.Update(articleToEdit);
+        await _databaseContext.SaveChangesAsync();
     }
 
-    public Task CreateComment(CreateCommentDTO createCommentDto)
+    public async Task CreateComment(CreateCommentDTO createCommentDto)
     {
-        throw new NotImplementedException();
+        await _databaseContext.Comments.AddAsync(createCommentDto);
+        await _databaseContext.SaveChangesAsync();
     }
 
-    public Task DeleteComment(int commentId)
+    public async Task DeleteComment(int commentId)
     {
-        throw new NotImplementedException();
+        var commentToDelete = await _databaseContext.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
+        _databaseContext.Comments.Remove(commentToDelete);
+        await _databaseContext.SaveChangesAsync();
     }
 
-    public Task EditComment(EditCommentDTO editCommentDto)
+    public async Task EditComment(EditCommentDTO editCommentDto, int commentId)
     {
-        throw new NotImplementedException();
+        var commentToEdit = await _databaseContext.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
+        _databaseContext.Comments.Update(commentToEdit);
+        await _databaseContext.SaveChangesAsync();
     }
 
     public async Task RebuildDatabase()
