@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BasicAuthAPI.Core.Service.Interfaces;
+using BasicAuthAPI.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasicAuthAPI.Controllers;
@@ -14,11 +16,12 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUser()
+    [Route("/login/")]
+    public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO createUserDto)
     {
         try
         {
-            return Ok(await _userService.CreateUser());
+            return Ok(await _userService.CreateUser(createUserDto));
         }
         catch (Exception e)
         {
@@ -32,7 +35,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            return Ok(await _userService.GetUsers());
+            return Ok(await _userService.GetAllUsers());
         }
         catch (Exception e)
         {
