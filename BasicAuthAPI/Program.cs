@@ -1,5 +1,9 @@
 using AutoMapper;
 using BasicAuthAPI.Core.Entities;
+using BasicAuthAPI.Core.Repository.Interfaces;
+using BasicAuthAPI.Core.Repository.Repositories;
+using BasicAuthAPI.Core.Service.Interfaces;
+using BasicAuthAPI.Core.Service.Services;
 using BasicAuthAPI.Database;
 using BasicAuthAPI.DTOs;
 
@@ -15,6 +19,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddDbContext<DatabaseContext>();
+
+builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<INewsRepository, NewsRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 
 var app = builder.Build();
