@@ -15,7 +15,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    [Route("/login/")]
+    [Route("/login")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO createUserDto)
     {
         try
@@ -30,6 +30,7 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [Authorize]
+    [Route("/GetUsers")]
     public async Task<IActionResult> GetUsers()
     {
         try
@@ -43,8 +44,8 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/{userId}")]
     [Authorize]
+    [Route("/{userId}")]
     public async Task<IActionResult> GetUserById([FromRoute] int userId)
     {
         try
@@ -59,11 +60,13 @@ public class UserController : ControllerBase
 
     [HttpDelete]
     [Authorize]
-    public async Task<IActionResult> DeleteUser()
+    [Route("/deleteUser")]
+    public async Task<IActionResult> DeleteUser([FromBody] int userId)
     {
         try
         {
-            return Ok(await _userService.DeleteUser());
+            await _userService.DeleteUser(userId);
+            return Ok();
         }
         catch (Exception e)
         {

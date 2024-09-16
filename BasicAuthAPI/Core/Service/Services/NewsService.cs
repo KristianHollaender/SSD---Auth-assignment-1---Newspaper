@@ -14,44 +14,44 @@ public class NewsService : INewsService
         _newsRepository = newsRepository;
     }
 
-    public Task<IEnumerable<Article>> GetAllArticles()
+    public async Task<IEnumerable<Article>> GetAllArticles()
     {
-        throw new NotImplementedException();
+        return await _newsRepository.GetAllArticles();
     }
 
-    public Task<Article> GetArticleById(int articleId)
+    public async Task<Article> GetArticleById(int articleId)
     {
-        throw new NotImplementedException();
+        return await _newsRepository.GetArticleById(articleId);
     }
 
-    public Task CreateArticle(CreateArticleDTO createArticleDto)
+    public async Task CreateArticle(CreateArticleDTO createArticleDto)
     {
-        throw new NotImplementedException();
+        await _newsRepository.CreateArticle(createArticleDto);
     }
 
-    public Task DeleteArticleById(int articleId)
+    public async Task DeleteArticleById(int articleId)
     {
-        throw new NotImplementedException();
+        await _newsRepository.DeleteArticleById(articleId);
     }
 
-    public Task EditArticle(EditArticleDTO editArticleDto)
+    public async Task EditArticle(EditArticleDTO editArticleDto)
     {
-        throw new NotImplementedException();
+        await _newsRepository.EditArticle(editArticleDto);
     }
 
-    public Task CreateComment(CreateCommentDTO createCommentDto)
+    public async Task CreateComment(CreateCommentDTO createCommentDto)
     {
-        throw new NotImplementedException();
+        await _newsRepository.CreateComment(createCommentDto);
     }
 
-    public Task DeleteComment(int commentId)
+    public async Task DeleteComment(int commentId)
     {
-        throw new NotImplementedException();
+        await _newsRepository.DeleteComment(commentId);
     }
 
-    public Task EditComment(EditCommentDTO editCommentDto)
+    public async Task EditComment(EditCommentDTO editCommentDto)
     {
-        throw new NotImplementedException();
+        await _newsRepository.EditComment(editCommentDto);
     }
 
     public async Task RebuildDatabase()

@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using BasicAuthAPI.Core.Entities;
 using BasicAuthAPI.Core.Repository.Interfaces;
 using BasicAuthAPI.Database;
+using BasicAuthAPI.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasicAuthAPI.Core.Repository.Repositories;
@@ -42,9 +43,24 @@ public class UserRepository : IUserRepository
         _context = context;
     }
     
-    public async Task<List<User>> GetAllUsers()
+    public async Task<IEnumerable<User>> GetAllUsers()
     {
         return await _context.Users.ToListAsync();
+    }
+
+    public Task<User> CreateUser(CreateUserDTO user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteUser(int userId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<User> GetUserById(int userId)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<User> CreateUser(User user)  
@@ -62,6 +78,10 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();  
   
         return user;  
-    }  
+    }
 
+    Task<List<User>> IUserRepository.GetAllUsers()
+    {
+        throw new NotImplementedException();
+    }
 }

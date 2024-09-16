@@ -17,6 +17,7 @@ public class NewsController : ControllerBase
     }
 
     [HttpGet]
+    [Route("/GetALlArticles")]
     public async Task<IActionResult> GetAllArticles()
     {
         try
@@ -45,7 +46,7 @@ public class NewsController : ControllerBase
 
     [HttpDelete]
     [Authorize]
-    [Route("/{articleId}")]
+    [Route("/{deleteArticle}")]
     public async Task<IActionResult> DeleteArticleById([FromRoute] int articleId)
     {
         try
@@ -61,6 +62,7 @@ public class NewsController : ControllerBase
 
     [HttpPut]
     [Authorize]
+    [Route("/EditArticle")]
     public async Task<IActionResult> EditArticle([FromBody] EditArticleDTO dto)
     {
         try
@@ -76,6 +78,7 @@ public class NewsController : ControllerBase
 
     [HttpPost]
     [Authorize]
+    [Route("/CreateArticle")]
     public async Task<IActionResult> CreateArticle([FromBody] CreateArticleDTO dto)
     {
         try
@@ -91,6 +94,7 @@ public class NewsController : ControllerBase
 
     [HttpPost]
     [Authorize]
+    [Route("/CreateComment")]
     public async Task<IActionResult> CreateComment([FromBody] CreateCommentDTO dto)
     {
         try
@@ -106,8 +110,8 @@ public class NewsController : ControllerBase
 
     [HttpDelete]
     [Authorize]
-    [Route("/{commentId}")]
-    public async Task<IActionResult> DeleteComment([FromRoute] int commentId)
+    [Route("/DeleteComment")]
+    public async Task<IActionResult> DeleteComment([FromBody] int commentId)
     {
         try
         {

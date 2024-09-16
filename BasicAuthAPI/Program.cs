@@ -5,11 +5,7 @@ using BasicAuthAPI.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var mapper = new MapperConfiguration(configure =>
-{
-    configure.CreateMap<CreateUserDTO, User>();
-    
-}).CreateMapper();
+var mapper = new MapperConfiguration(configure => { configure.CreateMap<CreateUserDTO, User>(); }).CreateMapper();
 
 
 // Add services to the container.
@@ -19,7 +15,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddDbContext<DatabaseContext>();
-
 
 
 var app = builder.Build();

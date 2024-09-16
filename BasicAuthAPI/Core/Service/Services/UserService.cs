@@ -25,8 +25,17 @@ public class UserService : IUserService
 
     public async Task<User> CreateUser(CreateUserDTO dto)
     {
-        var user = await _userRepository.CreateUser(_mapper.Map<User>(dto));
+        var user = await _userRepository.CreateUser(_mapper.Map<CreateUserDTO>(dto));
         return user;
     }
 
+    public Task DeleteUser(int userId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<User> GetUserById(int userId)
+    {
+        throw new NotImplementedException();
+    }
 }
