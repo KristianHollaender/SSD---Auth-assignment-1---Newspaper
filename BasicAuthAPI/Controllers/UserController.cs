@@ -18,7 +18,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            return Ok(await _userService.createUser());
+            return Ok(await _userService.CreateUser());
         }
         catch (Exception e)
         {
@@ -32,7 +32,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            return Ok(await _userService.getUsers());
+            return Ok(await _userService.GetUsers());
         }
         catch (Exception e)
         {
@@ -47,7 +47,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            return Ok(await _userService.getUserById(userId));
+            return Ok(await _userService.GetUserById(userId));
         }
         catch (Exception e)
         {
@@ -62,7 +62,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            return Ok(await _userService.deleteUser());
+            return Ok(await _userService.DeleteUser());
         }
         catch (Exception e)
         {
