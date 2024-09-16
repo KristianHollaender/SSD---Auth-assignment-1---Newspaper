@@ -9,7 +9,6 @@ public class DatabaseContext : Microsoft.EntityFrameworkCore.DbContext
     public DbSet<Article> Articles { get; set; }
     public DbSet<Comment> Comments { get; set; }
 
-
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
     }
