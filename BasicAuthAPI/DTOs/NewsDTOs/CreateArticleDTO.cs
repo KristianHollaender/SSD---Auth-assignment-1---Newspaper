@@ -4,11 +4,10 @@ namespace BasicAuthAPI.DTOs.NewsDTOs;
 
 public class CreateArticleDTO
 {
-    public int Id { get; set; }
     public string Title { get; set; }
     public string Content { get; set; }
     public int UserId { get; set; }
     public DateTime CreatedAt { get; set; }
     
-    public List<Comment> Comments { get; set; }
+    public List<Comment>? Comments { get; set; }
 }

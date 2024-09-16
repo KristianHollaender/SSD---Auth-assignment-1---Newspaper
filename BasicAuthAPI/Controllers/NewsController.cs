@@ -1,4 +1,5 @@
 ﻿using BasicAuthAPI.Core.Service.Interfaces;
+using BasicAuthAPI.DTOs.NewsDTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,7 +50,8 @@ public class NewsController : ControllerBase
     {
         try
         {
-            return Ok(await _newsService.DeleteArticleById(articleId));
+            await _newsService.DeleteArticleById(articleId);
+            return Ok();
         }
         catch (Exception e)
         {
@@ -59,11 +61,12 @@ public class NewsController : ControllerBase
 
     [HttpPut]
     [Authorize]
-    public async Task<IActionResult> EditArticle()
+    public async Task<IActionResult> EditArticle([FromBody] EditArticleDTO dto)
     {
         try
         {
-            return Ok(await _newsService.EditArticle());
+            await _newsService.EditArticle(dto);
+            return Ok();
         }
         catch (Exception e)
         {
@@ -73,26 +76,12 @@ public class NewsController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> CreateArticle()
+    public async Task<IActionResult> CreateArticle([FromBody] CreateArticleDTO dto)
     {
         try
         {
-            return Ok(await _newsService.CreateArticle());
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
-
-
-    [HttpGet]
-    [Route("/{articleId}")]
-    public async Task<IActionResult> GetCommentsOnArticle([FromRoute] int articleId)
-    {
-        try
-        {
-            return Ok(await _newsService.GetCommentsOnArticle(articleId));
+            await _newsService.CreateArticle(dto);
+            return Ok();
         }
         catch (Exception e)
         {
@@ -102,18 +91,19 @@ public class NewsController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> CreateComment()
+    public async Task<IActionResult> CreateComment([FromBody] CreateCommentDTO dto)
     {
         try
         {
-            return Ok(await _newsService.CreateComment());
+            await _newsService.CreateComment(dto);
+            return Ok();
         }
         catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpDelete]
     [Authorize]
     [Route("/{commentId}")]
@@ -121,15 +111,15 @@ public class NewsController : ControllerBase
     {
         try
         {
-            return Ok(await _newsService.CreateComment(commentId));
+            await _newsService.DeleteComment(commentId);
+            return Ok();
         }
         catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
-    
-    
+
     [HttpGet]
     [Route("/rebuildDB")]
     public async Task<IActionResult> RebuildDatabase()
