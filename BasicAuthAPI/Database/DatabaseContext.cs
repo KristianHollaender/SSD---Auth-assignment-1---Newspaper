@@ -9,7 +9,6 @@ public class DatabaseContext : Microsoft.EntityFrameworkCore.DbContext
     public DbSet<Article> Articles { get; set; }
     public DbSet<Comment> Comments { get; set; }
 
-
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
     }
@@ -21,6 +20,18 @@ public class DatabaseContext : Microsoft.EntityFrameworkCore.DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Article>()
+            .Property(a => a.Id)
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<Comment>()
+            .Property(c => c.Id)
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<User>()
+            .Property(u => u.Id)
+            .ValueGeneratedOnAdd();
+
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Username)
             .IsUnique();
