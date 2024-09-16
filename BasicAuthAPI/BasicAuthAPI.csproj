@@ -19,6 +19,10 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    <ItemGroup>
+      <Folder Include="DTOs\UserDTOs\" />
+    </ItemGroup>
+
     </ItemGroup>
 
 

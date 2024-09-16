@@ -1,6 +1,7 @@
 ﻿using BasicAuthAPI.Core.Entities;
 using BasicAuthAPI.Core.Repository.Interfaces;
 using BasicAuthAPI.Core.Service.Interfaces;
+using BasicAuthAPI.DTOs.NewsDTOs;
 
 namespace BasicAuthAPI.Core.Service.Services;
 
@@ -53,8 +54,8 @@ public class NewsService : INewsService
         throw new NotImplementedException();
     }
 
-    public Task RebuildDatabase()
+    public async Task RebuildDatabase()
     {
-        
+        await _newsRepository.RebuildDatabase();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BasicAuthAPI.Core.Entities;
 using BasicAuthAPI.Core.Repository.Interfaces;
+using BasicAuthAPI.DTOs.NewsDTOs;
 
 namespace BasicAuthAPI.Core.Service.Interfaces;
 
