@@ -15,7 +15,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    [Route("/createUser")]
+    [Route("/CreateUser")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO createUserDto)
     {
         try
@@ -29,6 +29,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     [Route("/GetUsers")]
     public async Task<IActionResult> GetUsers()
     {
@@ -44,7 +45,7 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [Authorize]
-    [Route("/GetUserById/{userId}")]
+    [Route("/{userId}")]
     public async Task<IActionResult> GetUserById([FromRoute] int userId)
     {
         try
