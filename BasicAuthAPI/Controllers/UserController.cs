@@ -7,9 +7,8 @@ namespace BasicAuthAPI.Controllers;
 
 public class UserController : ControllerBase
 {
-
     private readonly IUserService _userService;
-    
+
     public UserController(IUserService userService)
     {
         _userService = userService;
@@ -42,7 +41,7 @@ public class UserController : ControllerBase
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpGet]
     [Route("/{userId}")]
     [Authorize]
@@ -58,7 +57,6 @@ public class UserController : ControllerBase
         }
     }
 
-    
     [HttpDelete]
     [Authorize]
     public async Task<IActionResult> DeleteUser()
@@ -72,5 +70,4 @@ public class UserController : ControllerBase
             return BadRequest(e.Message);
         }
     }
-    
 }
