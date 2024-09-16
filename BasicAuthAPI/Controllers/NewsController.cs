@@ -31,7 +31,7 @@ public class NewsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/{articleId}")]
+    [Route("/GetArticleById/{articleId}")]
     public async Task<IActionResult> GetArticleById([FromRoute] int articleId)
     {
         try

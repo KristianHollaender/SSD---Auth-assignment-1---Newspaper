@@ -25,7 +25,7 @@ public class UserService : IUserService
 
     public async Task<User> CreateUser(CreateUserDTO dto)
     {
-        var user = await _userRepository.CreateUser(_mapper.Map<CreateUserDTO>(dto));
+        var user = await _userRepository.CreateUser(_mapper.Map<User>(dto));
         return user;
     }
 

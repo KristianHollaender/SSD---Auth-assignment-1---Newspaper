@@ -11,7 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var mapper = new MapperConfiguration(configure => { configure.CreateMap<CreateUserDTO, User>(); }).CreateMapper();
 
-
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
