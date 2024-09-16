@@ -12,7 +12,7 @@ public class UserRepository : IUserRepository
 {
     private readonly DatabaseContext _context;
 
-    public string HashPassword(string password)
+    private string HashPassword(string password)
     {
         // Create a salt  
         byte[] salt = new byte[16];

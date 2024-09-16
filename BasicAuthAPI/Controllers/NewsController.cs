@@ -17,7 +17,7 @@ public class NewsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/GetALlArticles")]
+    [Route("/Articles/GetAllArticles")]
     public async Task<IActionResult> GetAllArticles()
     {
         try
@@ -31,7 +31,7 @@ public class NewsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/GetArticleById/{articleId}")]
+    [Route("/Articles/{articleId}")]
     public async Task<IActionResult> GetArticleById([FromRoute] int articleId)
     {
         try
@@ -46,7 +46,7 @@ public class NewsController : ControllerBase
 
     [HttpDelete]
     [Authorize]
-    [Route("/{deleteArticle}")]
+    [Route("/Articles/{deleteArticle}")]
     public async Task<IActionResult> DeleteArticleById([FromRoute] int articleId)
     {
         try
@@ -62,12 +62,12 @@ public class NewsController : ControllerBase
 
     [HttpPut]
     [Authorize]
-    [Route("/EditArticle")]
-    public async Task<IActionResult> EditArticle([FromBody] EditArticleDTO dto)
+    [Route("/Articles/{articleId}")]
+    public async Task<IActionResult> EditArticle([FromBody] EditArticleDTO dto, [FromRoute] int articleId)
     {
         try
         {
-            await _newsService.EditArticle(dto);
+            await _newsService.EditArticle(dto, articleId);
             return Ok();
         }
         catch (Exception e)
@@ -78,7 +78,7 @@ public class NewsController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    [Route("/CreateArticle")]
+    [Route("/Articles/CreateArticle")]
     public async Task<IActionResult> CreateArticle([FromBody] CreateArticleDTO dto)
     {
         try
@@ -94,7 +94,7 @@ public class NewsController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    [Route("/CreateComment")]
+    [Route("/Comments/CreateComment")]
     public async Task<IActionResult> CreateComment([FromBody] CreateCommentDTO dto)
     {
         try
@@ -110,8 +110,8 @@ public class NewsController : ControllerBase
 
     [HttpDelete]
     [Authorize]
-    [Route("/DeleteComment")]
-    public async Task<IActionResult> DeleteComment([FromBody] int commentId)
+    [Route("/Comments/{commentId}")]
+    public async Task<IActionResult> DeleteComment([FromRoute] int commentId)
     {
         try
         {
@@ -123,6 +123,23 @@ public class NewsController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [HttpPut]
+    [Authorize]
+    [Route("/Comments/{commentId}")]
+    public async Task<IActionResult> EditComment([FromBody] EditCommentDTO dto, [FromRoute] int commentId)
+    {
+        try
+        {
+            await _newsService.EditComment(dto, commentId);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
 
     [HttpGet]
     [Route("/rebuildDB")]

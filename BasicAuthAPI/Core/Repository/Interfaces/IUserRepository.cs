@@ -1,5 +1,4 @@
 using BasicAuthAPI.Core.Entities;
-using BasicAuthAPI.DTOs;
 
 namespace BasicAuthAPI.Core.Repository.Interfaces;
 

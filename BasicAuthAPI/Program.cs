@@ -6,17 +6,28 @@ using BasicAuthAPI.Core.Service.Interfaces;
 using BasicAuthAPI.Core.Service.Services;
 using BasicAuthAPI.Database;
 using BasicAuthAPI.DTOs;
+using BasicAuthAPI.DTOs.NewsDTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var mapper = new MapperConfiguration(configure => { configure.CreateMap<CreateUserDTO, User>(); }).CreateMapper();
-
 // Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var mapper = new MapperConfiguration(configure =>
+{
+    configure.CreateMap<CreateUserDTO, User>();
+    
+    configure.CreateMap<CreateArticleDTO, Article>();
+    configure.CreateMap<EditArticleDTO, Article>();
+    
+    configure.CreateMap<CreateCommentDTO, Comment>();
+    configure.CreateMap<EditCommentDTO, Comment>();
+}).CreateMapper();
+
 builder.Services.AddSingleton(mapper);
+
 builder.Services.AddDbContext<DatabaseContext>();
 
 builder.Services.AddScoped<INewsService, NewsService>();
@@ -26,14 +37,6 @@ builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
-
-app.UseCors(options =>
-{
-    options.SetIsOriginAllowed(origin => true)
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowCredentials();
-});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

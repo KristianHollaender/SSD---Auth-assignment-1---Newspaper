@@ -1,61 +1,56 @@
-﻿using BasicAuthAPI.Core.Entities;
+﻿using AutoMapper;
+using BasicAuthAPI.Core.Entities;
 using BasicAuthAPI.Core.Repository.Interfaces;
 using BasicAuthAPI.Core.Service.Interfaces;
 using BasicAuthAPI.DTOs.NewsDTOs;
 
 namespace BasicAuthAPI.Core.Service.Services;
 
-public class NewsService : INewsService
+public class NewsService(INewsRepository newsRepository, IMapper mapper) : INewsService
 {
-    private readonly INewsRepository _newsRepository;
-
-    public NewsService(INewsRepository newsRepository)
-    {
-        _newsRepository = newsRepository;
-    }
-
+    
     public async Task<IEnumerable<Article>> GetAllArticles()
     {
-        return await _newsRepository.GetAllArticles();
+        return await newsRepository.GetAllArticles();
     }
 
     public async Task<Article> GetArticleById(int articleId)
     {
-        return await _newsRepository.GetArticleById(articleId);
+        return await newsRepository.GetArticleById(articleId);
     }
 
-    public async Task CreateArticle(CreateArticleDTO createArticleDto)
+    public async Task<Article> CreateArticle(CreateArticleDTO article)
     {
-        await _newsRepository.CreateArticle(createArticleDto);
+        return await newsRepository.CreateArticle(mapper.Map<Article>(article));
     }
 
     public async Task DeleteArticleById(int articleId)
     {
-        await _newsRepository.DeleteArticleById(articleId);
+        await newsRepository.DeleteArticleById(articleId);
     }
 
-    public async Task EditArticle(EditArticleDTO editArticleDto)
+    public async Task<Article> EditArticle(EditArticleDTO article, int articleId)
     {
-        await _newsRepository.EditArticle(editArticleDto);
+        return await newsRepository.EditArticle(mapper.Map<Article>(article), articleId);
     }
 
-    public async Task CreateComment(CreateCommentDTO createCommentDto)
-    {
-        await _newsRepository.CreateComment(createCommentDto);
+    public async Task<Comment> CreateComment(CreateCommentDTO comment)
+    { 
+        return await newsRepository.CreateComment(mapper.Map<Comment>(comment));
     }
 
     public async Task DeleteComment(int commentId)
     {
-        await _newsRepository.DeleteComment(commentId);
+        await newsRepository.DeleteComment(commentId);
     }
 
-    public async Task EditComment(EditCommentDTO editCommentDto)
+    public async Task<Comment> EditComment(EditCommentDTO comment, int commentId)
     {
-        await _newsRepository.EditComment(editCommentDto);
+        return await newsRepository.EditComment(mapper.Map<Comment>(comment), commentId);
     }
 
     public async Task RebuildDatabase()
     {
-        await _newsRepository.RebuildDatabase();
+        await newsRepository.RebuildDatabase();
     }
 }
