@@ -3,7 +3,9 @@ Imagine you are working on the back-end for a news site. The site contains news 
 
 The business model rely on subscription fees and advertising. Subscribers can, for a small monthly fee access a version of the site without adds. Guests can still read articles published on the site, but will be presented with ads.
 
-## We chose to use ASP.NET Core Identity to solve Authorization for this Exercise
+## ASP.NET Core Identity is used to solve Authorization for this Exercise
+![1689515031126](https://github.com/user-attachments/assets/54992f2d-f981-4e0d-a493-98d36e5517e2)
+
 
 
 ### How to compose application via Docker: 
