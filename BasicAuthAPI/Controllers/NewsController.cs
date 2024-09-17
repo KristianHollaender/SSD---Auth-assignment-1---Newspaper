@@ -35,20 +35,29 @@ public class NewsController : ControllerBase
             .SingleOrDefault();
     }
 
-    // [HttpDelete]
-    // [Route("/Articles/{deleteArticle}")]
-    // public async Task<IActionResult> DeleteArticleById([FromRoute] int articleId)
-    // {
-    //     try
-    //     {
-    //         await _newsService.DeleteArticleById(articleId);
-    //         return Ok();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         return BadRequest(e.Message);
-    //     }
-    // }
+    [HttpDelete]
+    [Route("/Articles/{articleId}")]
+    public IActionResult DeleteArticleById([FromRoute] int articleId)
+    {
+        // Fetch the article from the database
+        var article = _databaseContext.Articles
+            .Include(x => x.Author)
+            .SingleOrDefault(x => x.Id == articleId);
+
+        // Check if the article exists
+        if (article == null)
+        {
+            return NotFound("Article not found");
+        }
+
+        // Remove the article
+        _databaseContext.Articles.Remove(article);
+        _databaseContext.SaveChanges();
+
+        // Return a success response
+        return Ok(ArticleDto.FromEntity(article));
+    }
+
 
     [HttpPut]
     [Route("/Articles/{articleId}")]
@@ -128,20 +137,28 @@ public class NewsController : ControllerBase
         return CommentDto.FromEntity(created);
     }
 
-    // [HttpDelete]
-    // [Route("/Comments/{commentId}")]
-    // public async Task<IActionResult> DeleteComment([FromRoute] int commentId)
-    // {
-    //     try
-    //     {
-    //         await _newsService.DeleteComment(commentId);
-    //         return Ok();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         return BadRequest(e.Message);
-    //     }
-    // }
+    [HttpDelete]
+    [Route("/Comments/{commentId}")]
+    public IActionResult DeleteComment([FromRoute] int commentId)
+    {
+        // Fetch the comment from the database
+        var comment = _databaseContext.Comments
+            .Include(x => x.Author)
+            .SingleOrDefault(x => x.Id == commentId);
+
+        // Check if the comment exists
+        if (comment == null)
+        {
+            return NotFound("Comment not found");
+        }
+
+        // Remove the comment
+        _databaseContext.Comments.Remove(comment);
+        _databaseContext.SaveChanges();
+
+        // Return a success response
+        return Ok(CommentDto.FromEntity(comment));
+    }
 
     [HttpPut]
     [Route("/Comments/{commentId}")]
