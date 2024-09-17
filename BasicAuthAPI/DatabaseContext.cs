@@ -7,11 +7,12 @@ namespace BasicAuthAPI.Database;
 
 public class DatabaseContext : IdentityDbContext<IdentityUser>
 {
-    public DbSet<Article> Articles { get; set; }
-    public DbSet<Comment> Comments { get; set; }
-
     public DatabaseContext(DbContextOptions<DatabaseContext> options) 
         : base(options)
     {
     }
+    public DbSet<Article> Articles { get; set; }
+    public DbSet<Comment> Comments { get; set; }
+
+    
 }

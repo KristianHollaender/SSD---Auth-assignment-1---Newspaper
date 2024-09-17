@@ -1,18 +1,15 @@
-using AutoMapper;
-using BasicAuthAPI.Core.Entities;
+
 using BasicAuthAPI.Database;
 
-using BasicAuthAPI.DTOs.NewsDTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("NewsDB");
+    var connectionString = builder.Configuration.GetConnectionString("AppDB");
     options.UseSqlite(connectionString);
 });
 builder.Services.AddScoped<DbSeeder>();
@@ -23,18 +20,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthorization();
-
-var mapper = new MapperConfiguration(configure =>
-{
-    configure.CreateMap<ArticleDto, Article>();
-    configure.CreateMap<ArticleFormDto, Article>();
-
-    configure.CreateMap<CommentDto, Comment>();
-    configure.CreateMap<CommentFormDto, Comment>();
-    
-}).CreateMapper();
-
-builder.Services.AddSingleton(mapper);
 
 builder
     .Services.AddIdentityApiEndpoints<IdentityUser>(options =>
