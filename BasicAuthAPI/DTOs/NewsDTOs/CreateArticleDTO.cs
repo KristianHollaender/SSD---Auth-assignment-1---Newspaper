@@ -8,6 +8,4 @@ public class CreateArticleDTO
     public string Content { get; set; }
     public int UserId { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
-    
-    public List<Comment>? Comments { get; set; }
 }
