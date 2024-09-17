@@ -1,52 +1,65 @@
 using AutoMapper;
 using BasicAuthAPI.Core.Entities;
-using BasicAuthAPI.Core.Repository.Interfaces;
-using BasicAuthAPI.Core.Repository.Repositories;
-using BasicAuthAPI.Core.Service.Interfaces;
-using BasicAuthAPI.Core.Service.Services;
 using BasicAuthAPI.Database;
-using BasicAuthAPI.DTOs;
+
 using BasicAuthAPI.DTOs.NewsDTOs;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
+builder.Services.AddDbContext<DatabaseContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("NewsDB");
+    options.UseSqlite(connectionString);
+});
+builder.Services.AddScoped<DbSeeder>();
+
 builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthorization();
+
 var mapper = new MapperConfiguration(configure =>
 {
-    configure.CreateMap<CreateUserDTO, User>();
+    configure.CreateMap<ArticleDto, Article>();
+    configure.CreateMap<ArticleFormDto, Article>();
+
+    configure.CreateMap<CommentDto, Comment>();
+    configure.CreateMap<CommentFormDto, Comment>();
     
-    configure.CreateMap<CreateArticleDTO, Article>();
-    configure.CreateMap<EditArticleDTO, Article>();
-    
-    configure.CreateMap<CreateCommentDTO, Comment>();
-    configure.CreateMap<EditCommentDTO, Comment>();
 }).CreateMapper();
 
 builder.Services.AddSingleton(mapper);
 
-builder.Services.AddDbContext<DatabaseContext>();
-
-builder.Services.AddScoped<INewsService, NewsService>();
-builder.Services.AddScoped<IUserService, UserService>();
-
-builder.Services.AddScoped<INewsRepository, NewsRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder
+    .Services.AddIdentityApiEndpoints<IdentityUser>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+    })
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<DatabaseContext>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Seed
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    scope.ServiceProvider.GetRequiredService<DbSeeder>().SeedAsync().Wait();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapIdentityApi<IdentityUser>();
 
 app.Run();

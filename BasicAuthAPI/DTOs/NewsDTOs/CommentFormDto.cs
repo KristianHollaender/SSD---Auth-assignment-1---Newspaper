@@ -1,7 +1,7 @@
 ﻿namespace BasicAuthAPI.DTOs.NewsDTOs;
 
-public class EditCommentDTO
+public class CommentFormDto
 {
     public string Content { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public int ArticleId { get; set; }
 }

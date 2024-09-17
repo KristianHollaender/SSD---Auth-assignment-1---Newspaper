@@ -1,12 +1,23 @@
-﻿namespace BasicAuthAPI.Core.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
+namespace BasicAuthAPI.Core.Entities;
+
+[Index("AuthorId", Name = "IX_Comments_AuthorId")]
+[Index("ArticleId", Name = "IX_Comments_ArticleId")]
 public class Comment
 {
-    public int Id { get; set; }
+    [Key] public int Id { get; set; }
+
     public string Content { get; set; }
+    public string AuthorId { get; set; } = null!;
+    public IdentityUser Author { get; set; }
+
     public int ArticleId { get; set; }
-    public Article Article { get; set; }
-    public int UserId { get; set; }
-    public User User { get; set; }
-    public DateTime CreatedAt { get; set; }
+
+    [ForeignKey("ArticleId")]
+    [InverseProperty("Comments")]
+    public virtual Article Article { get; set; } = null!;
 }
