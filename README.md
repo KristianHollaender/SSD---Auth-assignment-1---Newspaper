@@ -1,5 +1,9 @@
-# SSD---Auth-assignment-1---Newspaper
-Basic auth on a newspaper assignment
+# Secure Software Development - Authorization Exercise
+Imagine you are working on the back-end for a news site. The site contains news articles written by journalists. The site have editors which can correct factual mistakes in articles and remove hateful comments.
+
+The business model rely on subscription fees and advertising. Subscribers can, for a small monthly fee access a version of the site without adds. Guests can still read articles published on the site, but will be presented with ads.
+
+## We chose to use ASP.NET Core Identity to solve Authorization for this Exercise
 
 
 ### How to compose application via Docker: 
