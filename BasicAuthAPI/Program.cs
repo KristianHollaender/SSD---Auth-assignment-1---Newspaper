@@ -1,6 +1,4 @@
-
 using BasicAuthAPI.Database;
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
