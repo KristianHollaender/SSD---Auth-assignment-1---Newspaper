@@ -39,7 +39,7 @@ DELETE /Comments/DeleteComment/{commentId}
 
 ### OBS: To use authorization, do a login and use bearer token
 ### Here is a list regarding all Asp .NET Core identity features
-<img src="https://github.com/user-attachments/assets/923d1c93-9e48-4d38-be05-718c3231c1d2" width="500"/>
+<img src="https://github.com/user-attachments/assets/923d1c93-9e48-4d38-be05-718c3231c1d2" width="600"/>
 
 
 ## USAGE 
@@ -50,7 +50,7 @@ DELETE /Comments/DeleteComment/{commentId}
 
 #### CreateArticle (Auth needed - Writer+)
 > This is without Authorization token filled in
-<img src="https://github.com/user-attachments/assets/6b91cd95-8e9e-4e20-9abe-f645fafd2a0d" height="500"/>
+<img src="https://github.com/user-attachments/assets/6b91cd95-8e9e-4e20-9abe-f645fafd2a0d" height="600"/>
 
 <br>
 <br>
