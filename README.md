@@ -50,7 +50,7 @@ DELETE /Comments/DeleteComment/{commentId}
 
 #### CreateArticle (Auth needed - Writer+)
 > This is without Authorization token filled in
-<img src="https://github.com/user-attachments/assets/6b91cd95-8e9e-4e20-9abe-f645fafd2a0d" height="600"/>
+<img src="https://github.com/user-attachments/assets/6b91cd95-8e9e-4e20-9abe-f645fafd2a0d" height="375"/>
 
 <br>
 <br>
@@ -58,7 +58,7 @@ DELETE /Comments/DeleteComment/{commentId}
 <br>
 
 > This is with the Auth token
-<img src="https://github.com/user-attachments/assets/77ad0c8f-c4e3-4af9-9558-12334c7c9348" height="600"/>
+<img src="https://github.com/user-attachments/assets/77ad0c8f-c4e3-4af9-9558-12334c7c9348" height="400"/>
 
 
 
